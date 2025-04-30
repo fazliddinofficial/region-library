@@ -1,6 +1,7 @@
 import { TextField, Typography, Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../services/axios";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -23,11 +24,17 @@ export const SignUp = () => {
     }));
   };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(
-      `Email: ${formData.email}\nPassword: ${formData.password}\nFullName: ${formData.fullName}`
-    );
+    try {
+      const { data: token } = await axiosInstance.post(
+        "/auth/signUp",
+        formData
+      );
+      sessionStorage.setItem("token", token);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
