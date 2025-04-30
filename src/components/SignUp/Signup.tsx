@@ -2,16 +2,17 @@ import { TextField, Typography, Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const SignIn = () => {
+export const SignUp = () => {
   const navigate = useNavigate();
 
-  const goSingUp = () => {
-    navigate("/");
+  const goSignIn = () => {
+    navigate("/SignIn");
   };
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+    fullName: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,9 @@ export const SignIn = () => {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(`Email: ${formData.email}\nPassword: ${formData.password}`);
+    alert(
+      `Email: ${formData.email}\nPassword: ${formData.password}\nFullName: ${formData.fullName}`
+    );
   };
 
   return (
@@ -41,7 +44,7 @@ export const SignIn = () => {
       }}
     >
       <Typography variant="h4" gutterBottom>
-        Sign In
+        Sign Up
       </Typography>
 
       <TextField
@@ -63,11 +66,22 @@ export const SignIn = () => {
         sx={{ margin: "20px", width: "300px" }}
       />
 
+      <TextField
+        label="Full name"
+        name="fullName"
+        type="text"
+        value={formData.fullName}
+        onChange={handleChange}
+        sx={{ width: 300 }}
+      />
+
       <Button type="submit" variant="contained" sx={{ margin: "20px" }}>
         Submit
       </Button>
 
-      <Button onClick={goSingUp}>Sign Up</Button>
+      <Button type="button" onClick={goSignIn}>
+        Sign In
+      </Button>
     </Box>
   );
 };
