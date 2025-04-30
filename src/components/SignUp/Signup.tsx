@@ -2,6 +2,7 @@ import { TextField, Typography, Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../services/axios";
+import { notifyError, notifySuccess } from "../../helper/toast";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -32,7 +33,9 @@ export const SignUp = () => {
         formData
       );
       sessionStorage.setItem("token", token);
+      notifySuccess("Signed up successfully!");
     } catch (error) {
+      notifyError("Something went wrong!");
       console.error(error);
     }
   };
@@ -86,7 +89,12 @@ export const SignUp = () => {
         Submit
       </Button>
 
-      <Button type="button" onClick={goSignIn}>
+      <Button
+        type="button"
+        onClick={() => {
+          goSignIn();
+        }}
+      >
         Sign In
       </Button>
     </Box>
