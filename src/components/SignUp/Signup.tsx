@@ -11,6 +11,10 @@ export const SignUp = () => {
     navigate("/SignIn");
   };
 
+  const goDashboard = () => {
+    navigate("/dashboard");
+  };
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,15 +32,17 @@ export const SignUp = () => {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const { data: token } = await axiosInstance.post(
-        "/auth/signUp",
-        formData
-      );
-      sessionStorage.setItem("token", token);
-      notifySuccess("Signed up successfully!");
-    } catch (error) {
-      notifyError("Something went wrong!");
-      console.error(error);
+      const res = await axiosInstance.post("/auth/signUp", formData);
+      if (res.status < 400) {
+        sessionStorage.setItem("token", res.data.token);
+        notifySuccess(res.data.message);
+        goDashboard();
+      } else if (res.status >= 400) {
+        notifyError(res.data.message);
+      }
+    } catch (error: any) {
+      notifyError(error.response.data.message);
+      console.log(error);
     }
   };
 

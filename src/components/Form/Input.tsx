@@ -11,6 +11,10 @@ export const SignIn = () => {
     navigate("/");
   };
 
+  const goDashBoard = () => {
+    navigate("/dashboard");
+  };
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,14 +31,17 @@ export const SignIn = () => {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const { data: token } = await axiosInstance.post(
+      const { data, status } = await axiosInstance.post(
         "/auth/signIn",
         formData
       );
-      sessionStorage.setItem("token", token);
-      notifySuccess("You are in!");
-    } catch (error) {
-      notifyError("Something went wrong!");
+      if (status === 201 || status === 200) {
+        sessionStorage.setItem("token", data.token);
+        notifySuccess(data.message);
+        goDashBoard();
+      }
+    } catch (error: any) {
+      notifyError(error.response.data.message);
       console.error(error);
     }
   };
