@@ -1,15 +1,9 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../services/axios";
 import { notifyError, notifySuccess } from "../../helper/toast";
 
 export const Dashboard = () => {
-  const navigate = useNavigate();
-  const goSomewhere = () => {
-    navigate("/dashboard");
-  };
-
   const [bookData, setBookData] = useState({
     name: "",
     bookNumber: "",
@@ -18,7 +12,7 @@ export const Dashboard = () => {
     createdYear: "",
     madeBy: "",
     isbn: "",
-    bookPage: "",
+    bookPage: "", 
     digitizationDate: "",
     digitizationBy: "",
   });
@@ -44,6 +38,7 @@ export const Dashboard = () => {
       sx={{
         minWidth: "100%",
         minHeight: "100vh",
+        margin: "0 auto"
       }}
     >
       <Box
@@ -59,7 +54,7 @@ export const Dashboard = () => {
           textAlign: "center",
           border: "1px solid #494949",
           borderRadius: "5px",
-          margin: "50px",
+          margin: "50px auto",
         }}
       >
         <Typography variant="h3" margin={2} color="white">

@@ -1,11 +1,14 @@
 import { TextField, Typography, Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../services/axios";
 import { notifyError, notifySuccess } from "../../helper/toast";
+import { useDispatch } from "react-redux";
+import { clearToken, setToken } from "../../store/authSlice";
 
 export const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const goSingUp = () => {
     navigate("/");
@@ -36,7 +39,7 @@ export const SignIn = () => {
         formData
       );
       if (status === 201 || status === 200) {
-        sessionStorage.setItem("token", data.token);
+        dispatch(setToken(data))
         notifySuccess(data.message);
         goDashBoard();
       }
@@ -45,6 +48,10 @@ export const SignIn = () => {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    dispatch(clearToken())
+  }, [])
 
   return (
     <Box
