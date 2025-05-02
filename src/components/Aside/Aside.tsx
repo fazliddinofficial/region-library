@@ -23,48 +23,13 @@ const demoTheme = createTheme({
   },
 });
 
-// Fake AllBooks Component (replace this with your actual import)
-function AllBooks() {
-  const books = [
-    { title: "The Alchemist", author: "Paulo Coelho" },
-    { title: "Clean Code", author: "Robert C. Martin" },
-    { title: "Atomic Habits", author: "James Clear" },
-  ];
-
-  return (
-    <Box>
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        All Books
-      </Typography>
-      {books.map((book, index) => (
-        <Box key={index} sx={{ mb: 1 }}>
-          <Typography variant="h6">{book.title}</Typography>
-          <Typography variant="body2">by {book.author}</Typography>
-        </Box>
-      ))}
-    </Box>
-  );
-}
-
-const books = [
-  { title: "The Alchemist", author: "Paulo Coelho" },
-  { title: "Clean Code", author: "Robert C. Martin" },
-  { title: "Atomic Habits", author: "James Clear" },
-];
-
 // Main Page Renderer
 function DemoPageContent({ pathname }: { pathname: string }) {
   switch (pathname) {
     case "/addBook":
       return <Dashboard />;
     case "/find":
-      return (
-        <div>
-          hello
-        </div>
-      );
-    // case "/books":
-    //   return <AllBooks />;
+      return <h2>empty</h2>;
     default:
       return (
         <Box sx={{ py: 4, textAlign: "center" }}>
@@ -96,11 +61,6 @@ export function Aside(props: DemoProps) {
           title: "All books",
           icon: <DescriptionIcon />,
         },
-        // {
-        //   segment: "books",
-        //   title: "All Books",
-        //   icon: <LibraryBooksIcon />,
-        // },
       ]}
       router={router}
       theme={demoTheme}

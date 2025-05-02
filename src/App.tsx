@@ -22,7 +22,7 @@ function App() {
         <Route
           path="/"
           element={
-            token ? <Navigate to="/dashboard" /> : <Navigate to="/SignUp" />
+            token ? <Navigate to="/aside" /> : <Navigate to="/SignUp" />
           }
         />
         <Route path="/SignUp" element={<SignUp />} />
