@@ -15,7 +15,7 @@ export const SignIn = () => {
   };
 
   const goDashBoard = () => {
-    navigate("/dashboard");
+    navigate("/aside");
   };
 
   const [formData, setFormData] = useState({

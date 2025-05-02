@@ -12,7 +12,7 @@ export const SignUp = () => {
   };
 
   const goDashboard = () => {
-    navigate("/dashboard");
+    navigate("/aside");
   };
 
   const [formData, setFormData] = useState({

@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createTheme } from "@mui/material/styles";
 import DescriptionIcon from "@mui/icons-material/Description";
-import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useDemoRouter } from "@toolpad/core/internal";
@@ -47,19 +46,25 @@ function AllBooks() {
   );
 }
 
+const books = [
+  { title: "The Alchemist", author: "Paulo Coelho" },
+  { title: "Clean Code", author: "Robert C. Martin" },
+  { title: "Atomic Habits", author: "James Clear" },
+];
+
 // Main Page Renderer
 function DemoPageContent({ pathname }: { pathname: string }) {
   switch (pathname) {
     case "/addBook":
       return <Dashboard />;
-    case "/about":
+    case "/find":
       return (
-        <Box sx={{ py: 4, textAlign: "center" }}>
-          <Typography variant="h4">About Us</Typography>
-        </Box>
+        <div>
+          hello
+        </div>
       );
-    case "/books":
-      return <AllBooks />;
+    // case "/books":
+    //   return <AllBooks />;
     default:
       return (
         <Box sx={{ py: 4, textAlign: "center" }}>
@@ -87,15 +92,15 @@ export function Aside(props: DemoProps) {
           icon: <DescriptionIcon />,
         },
         {
-          segment: "about",
-          title: "About Us",
+          segment: "find",
+          title: "All books",
           icon: <DescriptionIcon />,
         },
-        {
-          segment: "books",
-          title: "All Books",
-          icon: <LibraryBooksIcon />,
-        },
+        // {
+        //   segment: "books",
+        //   title: "All Books",
+        //   icon: <LibraryBooksIcon />,
+        // },
       ]}
       router={router}
       theme={demoTheme}
