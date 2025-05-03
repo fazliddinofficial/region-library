@@ -6,6 +6,7 @@ import { AppProvider } from "@toolpad/core/AppProvider";
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useDemoRouter } from "@toolpad/core/internal";
 import { Dashboard } from "../Dashboard/Dashboard";
+import { Search } from "../Search/Search";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -29,7 +30,7 @@ function DemoPageContent({ pathname }: { pathname: string }) {
     case "/addBook":
       return <Dashboard />;
     case "/find":
-      return <h2>empty</h2>;
+      return <Search />;
     default:
       return (
         <Box sx={{ py: 4, textAlign: "center" }}>
