@@ -6,8 +6,12 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { notifyError, notifyInfo } from "../../helper/toast";
+import axiosInstance from "../../services/axios";
 
 export type BookType = {
+  _id: string;
   name?: string;
   bookNumber?: number;
   bookType?: string;
@@ -22,6 +26,14 @@ export type BookType = {
 };
 
 export function BookCard(props: BookType) {
+  const handleDelete = async (id: string) => {
+    try {
+      const data = await axiosInstance.delete(`/book/${id}`);
+      notifyInfo(data.data);
+    } catch (error: any) {
+      notifyError(error.message);
+    }
+  };
   return (
     <Card sx={{ maxWidth: 345, margin: "20px", flex: "0 0 auto" }}>
       <CardMedia
@@ -31,7 +43,7 @@ export function BookCard(props: BookType) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Nomi: {props.name}
+          <strong>{props.name}</strong>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           Muallif: {props.author}
@@ -65,7 +77,16 @@ export function BookCard(props: BookType) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small">Edit</Button>
+        <Button
+          size="small"
+          variant="outlined"
+          startIcon={<DeleteIcon />}
+          color="error"
+          onClick={() => handleDelete(props._id)}
+        >
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );

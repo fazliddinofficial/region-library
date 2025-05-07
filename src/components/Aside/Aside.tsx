@@ -31,6 +31,7 @@ const demoTheme = createTheme({
 // Main Page Renderer
 function DemoPageContent({ pathname }: { pathname: string }) {
   const [books, setBooks] = useState<BookType[]>([]);
+
   const fetchAllBooks = async () => {
     try {
       const res = await axiosInstance.get("/book");
