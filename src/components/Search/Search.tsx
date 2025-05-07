@@ -16,7 +16,7 @@ export function Search() {
       const res = await axiosInstance.get("/book/search", {
         params: { q: value },
       });
-      console.log(res.data[0]);
+      console.log(res.data);
     } catch (error: any) {
       notifyError(error.message);
     }

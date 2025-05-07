@@ -73,7 +73,7 @@ export function BookCard(props: BookType) {
           Raqamlashtirilgan sana: <b>{props.digitizationDate}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Digitallashtirilgan hodim: <b>{props.digitizationBy}</b>
+          Raqamlashtirgan hodim: <b>{props.digitizationBy}</b>
         </Typography>
       </CardContent>
       <CardActions>
@@ -84,6 +84,7 @@ export function BookCard(props: BookType) {
           startIcon={<DeleteIcon />}
           color="error"
           onClick={() => handleDelete(props._id)}
+          type="submit"
         >
           Delete
         </Button>

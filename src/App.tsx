@@ -6,12 +6,12 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { SignIn } from "./components/Form/Input";
+import { SignIn } from "./components/SignIn/signIn";
 import { SignUp } from "./components/SignUp/Signup";
-import { Dashboard } from "./components/Dashboard/Dashboard";
+import { Dashboard } from "./components/CreateBookForm/CreateBookForm";
 import { ProtectedRoute } from "./components/ProtectRoute";
 import { store } from "./store";
-import { Aside } from "./components/Aside/Aside";
+import { Aside } from "./components/DashBoard/Dashboard";
 
 function App() {
   const { token } = store.getState().auth;

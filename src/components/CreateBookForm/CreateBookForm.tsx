@@ -6,13 +6,14 @@ import { notifyError, notifySuccess } from "../../helper/toast";
 export const Dashboard = () => {
   const [bookData, setBookData] = useState({
     name: "",
+    author: "",
     bookNumber: "",
     bookType: "",
     languageType: "",
     createdYear: "",
     madeBy: "",
     isbn: "",
-    bookPage: "", 
+    bookPage: "",
     digitizationDate: "",
     digitizationBy: "",
   });
@@ -38,7 +39,7 @@ export const Dashboard = () => {
       sx={{
         minWidth: "100%",
         minHeight: "100vh",
-        margin: "0 auto"
+        margin: "0 auto",
       }}
     >
       <Box
@@ -129,6 +130,16 @@ export const Dashboard = () => {
         />
 
         <TextField
+          label="Author"
+          name="author"
+          type="text"
+          value={bookData.author}
+          variant="outlined"
+          onChange={(e) => setBookData({ ...bookData, author: e.target.value })}
+          sx={{ width: 400, margin: 1 }}
+        />
+
+        <TextField
           label="ISBN"
           name="isbn"
           type="text"
@@ -151,13 +162,16 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label="Digitization date"
+          label=" "
           name="digitizationDate"
           type="date"
           value={bookData.digitizationDate}
           variant="outlined"
           onChange={(e) =>
-            setBookData({ ...bookData, digitizationDate: e.target.value })
+            setBookData({
+              ...bookData,
+              digitizationDate: e.target.value.toString(),
+            })
           }
           sx={{ width: 400, margin: 1 }}
         />
