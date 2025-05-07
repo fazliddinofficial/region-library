@@ -20,7 +20,7 @@ export type BookType = {
   createdYear?: number;
   madeBy?: string;
   isbn?: string;
-  bookpage?: number;
+  bookPage?: number;
   digitizationDate?: string;
   digitizationBy?: string;
 };
@@ -46,34 +46,34 @@ export function BookCard(props: BookType) {
           <strong>{props.name}</strong>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Muallif: {props.author}
+          Muallif: <b>{props.author}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Rukn: {props.bookType}
+          Rukn: <b>{props.bookType}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Alifbo: {props.languageType}
+          Alifbo: <b>{props.languageType}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Yozilgan yil: {props.createdYear}
+          Yozilgan yil: <b>{props.createdYear}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Nashr yili: {props.createdYear}
+          Nashr yili: <b>{props.createdYear}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Nashriyot: {props.madeBy}
+          Nashriyot: <b>{props.madeBy}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          ISBN: {props.isbn}
+          ISBN: <b>{props.isbn}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Sahifasi: {props.bookpage}
+          Sahifasi: <b>{props.bookPage}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Raqamlashtirilgan sana: {props.digitizationDate}
+          Raqamlashtirilgan sana: <b>{props.digitizationDate}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Digitallashtirilgan hodim: {props.digitizationBy}
+          Digitallashtirilgan hodim: <b>{props.digitizationBy}</b>
         </Typography>
       </CardContent>
       <CardActions>
