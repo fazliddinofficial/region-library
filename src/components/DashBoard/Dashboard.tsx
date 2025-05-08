@@ -51,11 +51,6 @@ function DemoPageContent({ pathname }: { pathname: string }) {
       return (
         <>
           <Search />
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {books.map((book: BookType) => (
-              <BookCard {...book} />
-            ))}
-          </div>
         </>
       );
     default:

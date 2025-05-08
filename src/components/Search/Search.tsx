@@ -1,7 +1,8 @@
-import { TextField } from "@mui/material";
-import { useState } from "react";
+import { Button, debounce, TextField } from "@mui/material";
+import { useCallback, useState } from "react";
 import { notifyError } from "../../helper/toast";
 import axiosInstance from "../../services/axios";
+import { BookCard } from "../BookCard/Book";
 
 export type BookType = {
   _id: string;
@@ -18,41 +19,71 @@ export type BookType = {
   digitizationBy?: string;
 };
 export function Search() {
-  const [value, setValue] = useState("");
-  const [books, setBook] = useState<BookType[]>([]);
+  const [value, setValue] = useState<string>("");
+  const [books, setBooks] = useState<BookType[]>([]);
 
-  const handleChange = (e: any) => {
-    setValue(e.target.value);
-    handleSearch();
-  };
-
-  const handleSearch = async () => {
+  const handleSearch = async (searchTerm: string) => {
     try {
+      if (searchTerm === "") {
+        const res = await axiosInstance.get("/book");
+        const validBooks = res.data.filter(
+          (book: BookType | null) => book !== null
+        );
+        setBooks(validBooks);
+        return;
+      }
+
       const res = await axiosInstance.get("/book/search", {
-        params: { q: value },
+        params: { q: searchTerm },
       });
-      res.data.forEach((v: any) => {
-        if (v !== null) {
-          setBook(books);
-        }
-      });
+
+      const validBooks = res.data.filter(
+        (book: BookType | null) => book !== null
+      );
+      setBooks(validBooks);
     } catch (error: any) {
       notifyError(error.message);
     }
   };
 
-  console.log(books)
+  // Debounced search function
+  const debouncedSearch = useCallback(
+    debounce((query) => handleSearch(query), 300),
+    []
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    debouncedSearch(newValue);
+  };
+
   return (
-    <div style={{ width: "100%", textAlign: "center", padding: "20px 0" }}>
-      <TextField
-        sx={{
-          width: "50%",
-        }}
-        label="Name"
-        variant="outlined"
-        value={value}
-        onChange={handleChange}
-      />
-    </div>
+    <>
+      <div style={{ width: "100%", textAlign: "center", padding: "20px 0" }}>
+        <TextField
+          sx={{ width: "50%" }}
+          label="Name"
+          variant="outlined"
+          value={value}
+          onChange={handleChange}
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleSearch(value)}
+          style={{ padding: "14px", margin: "0 20px" }}
+        >
+          Search
+        </Button>
+      </div>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {books.length > 0 ? (
+          books.map((book) => <BookCard key={book._id} {...book} />)
+        ) : (
+          <p style={{ textAlign: "center", width: "100%" }}>No books found</p>
+        )}
+      </div>
+    </>
   );
 }
