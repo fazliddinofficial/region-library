@@ -7,10 +7,6 @@ import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useDemoRouter } from "@toolpad/core/internal";
 import { Dashboard } from "../CreateBookForm/CreateBookForm";
 import { Search } from "../Search/Search";
-import { BookCard, BookType } from "../BookCard/Book";
-import { useEffect, useState } from "react";
-import { notifyError } from "../../helper/toast";
-import axiosInstance from "../../services/axios";
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -28,22 +24,7 @@ const demoTheme = createTheme({
   },
 });
 
-// Main Page Renderer
 function DemoPageContent({ pathname }: { pathname: string }) {
-  const [books, setBooks] = useState<BookType[]>([]);
-
-  const fetchAllBooks = async () => {
-    try {
-      const res = await axiosInstance.get("/book");
-      setBooks(res.data);
-    } catch (e: any) {
-      notifyError(e.message);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllBooks();
-  }, []);
   switch (pathname) {
     case "/addBook":
       return <Dashboard />;
