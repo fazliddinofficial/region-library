@@ -3,7 +3,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardMedia,
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -29,18 +28,15 @@ export function BookCard(props: BookType) {
   const handleDelete = async (id: string) => {
     try {
       const data = await axiosInstance.delete(`/book/${id}`);
-      notifyInfo(data.data);
+      if (data.data == true) {
+        notifyInfo("Book has been deleted successfully!");
+      }
     } catch (error: any) {
-      notifyError(error.message);
+      notifyError(error.response.data.message);
     }
   };
   return (
     <Card sx={{ maxWidth: 345, margin: "20px", flex: "0 0 auto" }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="https://cdn.pixabay.com/photo/2018/01/17/18/43/book-3088775_1280.jpg"
-        title=""
-      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           <strong>{props.name}</strong>

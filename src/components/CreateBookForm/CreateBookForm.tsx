@@ -189,7 +189,7 @@ export const Dashboard = () => {
         />
 
         <Button type="submit" variant="contained" sx={{ margin: "20px" }}>
-          Submit
+          Create book
         </Button>
       </Box>
     </Box>
