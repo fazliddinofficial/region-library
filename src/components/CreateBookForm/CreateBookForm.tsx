@@ -7,7 +7,6 @@ export const Dashboard = () => {
   const [bookData, setBookData] = useState({
     name: "",
     author: "",
-    bookNumber: "",
     bookType: "",
     languageType: "",
     createdYear: "",
@@ -62,7 +61,7 @@ export const Dashboard = () => {
           Creating book form
         </Typography>
         <TextField
-          label="Name"
+          label="Nomi"
           name="name"
           type="text"
           value={bookData.name}
@@ -72,19 +71,17 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label="Book number"
-          name="bookName"
-          type="number"
-          value={bookData.bookNumber}
+          label="Muallifi (Nashrgacha tayyorlovchi)"
+          name="author"
+          type="text"
+          value={bookData.author}
           variant="outlined"
-          onChange={(e) =>
-            setBookData({ ...bookData, bookNumber: e.target.value })
-          }
+          onChange={(e) => setBookData({ ...bookData, author: e.target.value })}
           sx={{ width: 400, margin: 1 }}
         />
 
         <TextField
-          label="Book type"
+          label="Rukn"
           name="bookType"
           type="text"
           value={bookData.bookType}
@@ -96,7 +93,7 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label="Language type"
+          label="Alifbo"
           name="lanType"
           type="text"
           value={bookData.languageType}
@@ -108,7 +105,7 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label="Created year"
+          label="Nashr yili"
           name="createdYear"
           type="number"
           value={bookData.createdYear}
@@ -120,22 +117,12 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label="Made by"
+          label="Nashriyot"
           name="madeBy"
           type="text"
           value={bookData.madeBy}
           variant="outlined"
           onChange={(e) => setBookData({ ...bookData, madeBy: e.target.value })}
-          sx={{ width: 400, margin: 1 }}
-        />
-
-        <TextField
-          label="Author"
-          name="author"
-          type="text"
-          value={bookData.author}
-          variant="outlined"
-          onChange={(e) => setBookData({ ...bookData, author: e.target.value })}
           sx={{ width: 400, margin: 1 }}
         />
 
@@ -150,7 +137,7 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label="Book page"
+          label="Sahifasi"
           name="bookPage"
           type="number"
           value={bookData.bookPage}
@@ -162,7 +149,7 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label=" "
+          label="Raqamlashtirilgan vaqti"
           name="digitizationDate"
           type="date"
           value={bookData.digitizationDate}
@@ -174,10 +161,11 @@ export const Dashboard = () => {
             })
           }
           sx={{ width: 400, margin: 1 }}
+          slotProps={{ inputLabel: { shrink: true } }}
         />
 
         <TextField
-          label="Digitization by"
+          label="Raqamlashtirgan hodim"
           name="digitizationBy"
           type="text"
           value={bookData.digitizationBy}
