@@ -22,13 +22,8 @@ export const Dashboard = () => {
     try {
       const res = await axiosInstance.post("/book", bookData);
       notifySuccess(res.data.message);
-      if (res.status === 200 || res.status === 201) {
-      } else if (res.status >= 400) {
-        notifyError(res.data.message);
-      }
     } catch (error: any) {
       notifyError(error.response.data.message);
-      console.log(error);
     }
   };
 
