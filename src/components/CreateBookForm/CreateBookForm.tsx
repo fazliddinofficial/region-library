@@ -7,7 +7,7 @@ export const Dashboard = () => {
   const [bookData, setBookData] = useState({
     name: "",
     author: "",
-    bookType: "",
+    inventarNumber: "",
     languageType: "",
     createdYear: "",
     madeBy: "",
@@ -60,6 +60,7 @@ export const Dashboard = () => {
           name="name"
           type="text"
           value={bookData.name}
+          required
           variant="outlined"
           onChange={(e) => setBookData({ ...bookData, name: e.target.value })}
           sx={{ width: 400, margin: 1 }}
@@ -68,6 +69,7 @@ export const Dashboard = () => {
         <TextField
           label="Muallifi (Nashrgacha tayyorlovchi)"
           name="author"
+          required
           type="text"
           value={bookData.author}
           variant="outlined"
@@ -76,13 +78,13 @@ export const Dashboard = () => {
         />
 
         <TextField
-          label="Rukn"
-          name="bookType"
+          label="Inventar raqam"
+          name="inventarNumber"
           type="text"
-          value={bookData.bookType}
+          value={bookData.inventarNumber}
           variant="outlined"
           onChange={(e) =>
-            setBookData({ ...bookData, bookType: e.target.value })
+            setBookData({ ...bookData, inventarNumber: e.target.value })
           }
           sx={{ width: 400, margin: 1 }}
         />

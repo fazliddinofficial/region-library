@@ -13,7 +13,7 @@ export type BookType = {
   _id: string;
   name?: string;
   bookNumber?: number;
-  bookType?: string;
+  inventarNumber?: string;
   author?: string;
   languageType?: string;
   createdYear?: number;
@@ -45,7 +45,7 @@ export function BookCard(props: BookType) {
           Muallif: <b>{props.author}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Rukn: <b>{props.bookType}</b>
+          Inventar raqam: <b>{props.inventarNumber}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           Alifbo: <b>{props.languageType}</b>
