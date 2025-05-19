@@ -10,7 +10,7 @@ export const Dashboard = () => {
     name: "",
     author: "",
     inventarNumber: "",
-    languageType: "",
+    languageType: "Lotin",
     createdYear: "",
     madeBy: "",
     isbn: "",
@@ -147,7 +147,7 @@ export const Dashboard = () => {
           sx={{ width: 400, margin: 1 }}
         />
 
-        <TextField
+        {/* <TextField
           label="Raqamlashtirilgan vaqti"
           name="digitizationDate"
           type="date"
@@ -161,7 +161,7 @@ export const Dashboard = () => {
           }
           sx={{ width: 400, margin: 1 }}
           slotProps={{ inputLabel: { shrink: true } }}
-        />
+        /> */}
 
         <TextField
           label="Raqamlashtirgan hodim"
