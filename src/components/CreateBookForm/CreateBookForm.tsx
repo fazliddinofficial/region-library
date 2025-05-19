@@ -4,6 +4,8 @@ import axiosInstance from "../../services/axios";
 import { notifyError, notifySuccess } from "../../helper/toast";
 
 export const Dashboard = () => {
+  const today = new Date().toISOString().split("T")[0];
+
   const [bookData, setBookData] = useState({
     name: "",
     author: "",
@@ -13,7 +15,7 @@ export const Dashboard = () => {
     madeBy: "",
     isbn: "",
     bookPage: "",
-    digitizationDate: "",
+    digitizationDate: today.toString(),
     digitizationBy: "",
   });
 

@@ -20,7 +20,7 @@ export type BookType = {
   madeBy?: string;
   isbn?: string;
   bookPage?: number;
-  digitizationDate?: string;
+  digitizationDate?: Date;
   digitizationBy?: string;
 };
 
@@ -66,7 +66,12 @@ export function BookCard(props: BookType) {
           Sahifasi: <b>{props.bookPage}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Raqamlashtirilgan sana: <b>{props.digitizationDate}</b>
+          Raqamlashtirilgan sana:{" "}
+          <b>
+            {props.digitizationDate
+              ? new Date(props.digitizationDate).toLocaleDateString("en-GB")
+              : new Date().toLocaleDateString("en-GB")}
+          </b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           Raqamlashtirgan hodim: <b>{props.digitizationBy}</b>
