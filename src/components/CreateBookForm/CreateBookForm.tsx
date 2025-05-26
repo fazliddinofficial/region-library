@@ -146,23 +146,6 @@ export const Dashboard = () => {
           }
           sx={{ width: 400, margin: 1 }}
         />
-
-        {/* <TextField
-          label="Raqamlashtirilgan vaqti"
-          name="digitizationDate"
-          type="date"
-          value={bookData.digitizationDate}
-          variant="outlined"
-          onChange={(e) =>
-            setBookData({
-              ...bookData,
-              digitizationDate: e.target.value.toString(),
-            })
-          }
-          sx={{ width: 400, margin: 1 }}
-          slotProps={{ inputLabel: { shrink: true } }}
-        /> */}
-
         <TextField
           label="Raqamlashtirgan hodim"
           name="digitizationBy"
