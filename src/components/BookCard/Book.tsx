@@ -20,17 +20,22 @@ export type BookType = {
   madeBy?: string;
   isbn?: string;
   bookPage?: number;
-  digitizationDate?: Date;
+  digitizationDate?: string;
   digitizationBy?: string;
+  createdAt?: string;
 };
 
-export function BookCard(props: BookType) {
+interface BookProps {
+  book: BookType;
+  refetch: () => void;
+}
+
+export function BookCard({ book, refetch }: BookProps) {
   const handleDelete = async (id: string) => {
     try {
-      const data = await axiosInstance.delete(`/book/${id}`);
-      if (data.data == true) {
-        notifyInfo("Book has been deleted successfully!");
-      }
+      await axiosInstance.delete(`/book/${id}`);
+      refetch();
+      notifyInfo("Book has been deleted successfully!");
     } catch (error: any) {
       notifyError(error.response.data.message);
     }
@@ -39,42 +44,42 @@ export function BookCard(props: BookType) {
     <Card sx={{ maxWidth: 345, margin: "20px", flex: "0 0 auto" }}>
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          <strong>{props.name}</strong>
+          <strong>{book.name}</strong>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Muallif: <b>{props.author}</b>
+          Muallif: <b>{book.author}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Inventar raqam: <b>{props.inventarNumber}</b>
+          Inventar raqam: <b>{book.inventarNumber}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Alifbo: <b>{props.languageType}</b>
+          Alifbo: <b>{book.languageType}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Yozilgan yil: <b>{props.createdYear}</b>
+          Yozilgan yil: <b>{book.createdYear}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Nashr yili: <b>{props.createdYear}</b>
+          Nashr yili: <b>{book.createdYear}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Nashriyot: <b>{props.madeBy}</b>
+          Nashriyot: <b>{book.madeBy}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          ISBN: <b>{props.isbn}</b>
+          ISBN: <b>{book.isbn}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Sahifasi: <b>{props.bookPage}</b>
+          Sahifasi: <b>{book.bookPage}</b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           Raqamlashtirilgan sana:{" "}
           <b>
-            {props.digitizationDate
-              ? new Date(props.digitizationDate).toLocaleDateString("en-GB")
+            {book.digitizationDate
+              ? new Date(book.digitizationDate).toLocaleDateString("en-GB")
               : new Date().toLocaleDateString("en-GB")}
           </b>
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Raqamlashtirgan hodim: <b>{props.digitizationBy}</b>
+          Raqamlashtirgan hodim: <b>{book.digitizationBy}</b>
         </Typography>
       </CardContent>
       <CardActions>
@@ -84,9 +89,8 @@ export function BookCard(props: BookType) {
           variant="outlined"
           startIcon={<DeleteIcon />}
           color="error"
-          onClick={() => handleDelete(props._id)}
-          type="submit"
-        >
+          onClick={() => handleDelete(book._id)}
+          type="submit">
           Delete
         </Button>
       </CardActions>

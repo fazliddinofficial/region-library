@@ -6,7 +6,7 @@ import { notifyError, notifySuccess } from "../../helper/toast";
 export const Dashboard = () => {
   const today = new Date().toISOString().split("T")[0];
 
-  const [bookData, setBookData] = useState({
+  const initialBookData = {
     name: "",
     author: "",
     inventarNumber: "",
@@ -15,15 +15,18 @@ export const Dashboard = () => {
     madeBy: "",
     isbn: "",
     bookPage: "",
-    digitizationDate: today.toString(),
+    digitizationDate: today,
     digitizationBy: "",
-  });
+  };
+
+  const [bookData, setBookData] = useState(initialBookData);
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await axiosInstance.post("/book", bookData);
       notifySuccess(res.data.message);
+      setBookData(initialBookData);
     } catch (error: any) {
       notifyError(error.response.data.message);
     }
@@ -36,8 +39,8 @@ export const Dashboard = () => {
         minWidth: "100%",
         minHeight: "100vh",
         margin: "0 auto",
-      }}
-    >
+        paddingTop: 3,
+      }}>
       <Box
         onSubmit={handleSubmit}
         component="form"
@@ -51,10 +54,9 @@ export const Dashboard = () => {
           textAlign: "center",
           border: "1px solid #494949",
           borderRadius: "5px",
-          margin: "50px auto",
-        }}
-      >
-        <Typography variant="h3" margin={2} color="white">
+          margin: "0 auto",
+        }}>
+        <Typography variant="h3" margin={2}>
           Creating book form
         </Typography>
         <TextField

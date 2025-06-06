@@ -1,4 +1,4 @@
-import { Button, debounce, TextField } from "@mui/material";
+import { Box, Button, debounce, TextField } from "@mui/material";
 import { useCallback, useState } from "react";
 import { notifyError } from "../../helper/toast";
 import axiosInstance from "../../services/axios";
@@ -59,8 +59,8 @@ export function Search() {
   };
 
   return (
-    <>
-      <div style={{ width: "100%", textAlign: "center", padding: "20px 0" }}>
+    <Box paddingTop={3}>
+      <div style={{ width: "100%", textAlign: "center" }}>
         <TextField
           sx={{ width: "50%" }}
           label="Name"
@@ -72,18 +72,23 @@ export function Search() {
           variant="contained"
           color="primary"
           onClick={() => handleSearch(value)}
-          style={{ padding: "14px", margin: "0 20px" }}
-        >
+          style={{ padding: "14px", margin: "0 20px" }}>
           Search
         </Button>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {books.length > 0 ? (
-          books.map((book) => <BookCard key={book._id} {...book} />)
+          books.map((book) => (
+            <BookCard
+              key={book._id}
+              book={book}
+              refetch={() => handleSearch(value)}
+            />
+          ))
         ) : (
           <p style={{ textAlign: "center", width: "100%" }}>No books found</p>
         )}
       </div>
-    </>
+    </Box>
   );
 }
